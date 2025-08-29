@@ -1,0 +1,97 @@
+-- Base Class ---
+class Superhero:
+     A base class for all superheroes.
+
+    Attributes:
+        name (str): The superhero's name.
+        secret_identity (str): The superhero's civilian name.
+        power_level (int): A numerical value representing the superhero's strength.
+        nemesis (str): The superhero's primary archenemy.
+      def __init__(self, name, secret_identity, power_level, nemesis):
+           Initializes a new Superhero object.
+            Args:
+            name (str): The superhero's name.
+            secret_identity (str): The superhero's civilian name.
+            power_level (int): The superhero's power level (1-100).
+            nemesis (str): The superhero's archenemy.
+            self.name = name
+        self.secret_identity = secret_identity
+        self.power_level = power_level
+        self.nemesis = nemesis
+   def display_info(self):
+       Prints the superhero's basic information."""
+        print("--- Superhero Profile ---")
+        print(f"Name: {self.name}")
+        print(f"Secret Identity: {self.secret_identity}")
+        print(f"Power Level: {self.power_level}/100")
+        print(f"Arch-nemesis: {self.nemesis}")
+    def battle(self, villain_power):
+           Simulates a battle with a villain.
+              Args:
+        villain_power (int): The villain's power level.
+       Returns:
+            str: The outcome of the battle.
+             if self.power_level > villain_power:
+            return f"{self.name} has defeated their foe!"
+        elif self.power_level == villain_power:
+            return f"The battle between {self.name} and their foe was a draw."
+        else:
+            return f"{self.name} was overpowered and needs to retreat!"
+
+# --- Inheritance Class (Polymorphism) ---
+class FlyingSuperhero(Superhero):
+    """
+    A subclass of Superhero with an added flight attribute.
+
+    Polymorphism is demonstrated through the overridden `display_info` method.
+    """
+    def __init__(self, name, secret_identity, power_level, nemesis, flight_speed):
+        """
+        Initializes a new FlyingSuperhero object, calling the parent constructor.
+     
+        Args:
+            name (str): The superhero's name.
+            secret_identity (str): The superhero's civilian name.
+            power_level (int): The superhero's power level (1-100).
+            nemesis (str): The superhero's archenemy.
+            flight_speed (int): The superhero's flight speed in mph.
+        """
+        # Call the parent class constructor
+        super().__init__(name, secret_identity, power_level, nemesis)
+        self.flight_speed = flight_speed
+
+    def display_info(self):
+        """
+        Overrides the parent method to include flight speed.
+        This is an example of polymorphism.
+        """
+        super().display_info()
+        print(f"Flight Speed: {self.flight_speed} mph")
+
+    def patrol_skies(self):
+        """Prints a message about the superhero patrolling."""
+        print(f"{self.name} is patrolling the skies at {self.flight_speed} mph.")
+
+# --- Main Program Execution ---
+if __name__ == "__main__":
+    print("Creating a standard superhero...")
+    # Create an instance of the base class
+    hero1 = Superhero("Captain Courage", "Leo Marshall", 85, "Dr. Doom-Bringer")
+    hero1.display_info()
+    print("\nSimulating a battle...")
+    print(hero1.battle(70))
+    print(hero1.battle(90))
+
+    print("\n" + "="*40 + "\n")
+
+    print("Creating a flying superhero...")
+    # Create an instance of the subclass
+    flying_hero = FlyingSuperhero("Velocity", "Ava Sinclair", 92, "The Shadow", 750)
+    # The display_info method from the subclass is called, demonstrating polymorphism
+    flying_hero.display_info()
+    print("\n" + "="*40 + "\n")
+
+    print("Flying superhero in action...")
+    flying_hero.patrol_skies()
+    print("\nSimulating a battle...")
+    print(flying_hero.battle(88))
